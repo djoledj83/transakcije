@@ -1,0 +1,109 @@
+{
+    appVersion: '20240424/02',
+    cnt: 24,
+    events: [
+        {
+        message: 'Transaction started',
+        messageLocal: 'Transakcija pokrenuta',
+        timestamp: '2024-12-09T19: 03: 50.510Z',
+        type: 'TRANSACTION_STARTED'
+        },
+        {
+        message: 'Wait for card read',
+        messageLocal: 'Čekanje na čitanje kartice',
+        timestamp: '2024-12-09T19: 03: 51.699Z',
+        type: 'CARD_AWAIT'
+        },
+        {
+        message: 'Contactless card approached',
+        messageLocal: 'Beskontaktna kartica prineta',
+        timestamp: '2024-12-09T19: 03: 51.824Z',
+        type: 'CLESS_READ'
+        },
+        {
+        message: 'Processing',
+        messageLocal: 'Obrada',
+        timestamp: '2024-12-09T19: 03: 53.173Z',
+        type: 'INSTALLMENTS_PROCESSING'
+        },
+        {
+        message: 'Processing',
+        messageLocal: 'Obrada',
+        timestamp: '2024-12-09T19: 03: 53.208Z',
+        type: 'HOST_PROCESSING'
+        },
+        {
+        message: 'OK',
+        messageLocal: 'U redu',
+        timestamp: '2024-12-09T19: 03: 54.824Z',
+        type: 'HOST_PROCESSING_FINISHED'
+        },
+        {
+        message: 'Printing',
+        messageLocal: 'Štampa',
+        timestamp: '2024-12-09T19: 03: 57.431Z',
+        type: 'PRINT_MERCHANT_RECEIPT'
+        },
+        {
+        message: 'Transaction finished',
+        messageLocal: 'Transakcija završena',
+        timestamp: '2024-12-09T19: 04: 07.550Z',
+        type: 'TRANSACTION_FINISHED'
+        }
+    ],
+    profileId: 'MNENLB00760',
+    properties: {
+      acquirer: 'NLB',
+      amounts: {
+        base: '15.00',
+        cashback: '0.00',
+        currencyCode: 'EUR',
+        tip: '0.00',
+        total: '15.00'
+        },
+      authorization: 'HCNBRD',
+      batch: '000416',
+      card: {
+        bin: '480622',
+        cardInterface: 'contactlessEMV',
+        name: 'VISA',
+        pan: '************4934'
+        },
+      cvm: {},
+      emv: {
+        aid: 'A0000000031010',
+        aidLabel: 'VISA DEBIT',
+        cryptogram1: [Object
+            ],
+        ctq: '0080',
+        emvDate: '241209',
+        ffi: '23880000',
+        ttq: '36804000',
+        tvr: '0000000000'
+        },
+      invoice: '026745',
+      issuer: 'VISA',
+      merchant: '',
+      merchantReceipt: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAKBueIx4ZKCMgoy0qqC+8P //8Nzc8P//////////////////////////////////////////////////////////2wBDAaq0tPDS8P//////////////////////////////////////////////////////////////////////////////wAARCAPDAYADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIBAwT/xAA2EAACAgAEAwYFBAICAwEBAAAAAQIRAxIhMUFRYRMiMnGBoTORscHRI0Jy8OHxNEMEUoJEYv/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATiScIWgKBMpNTiuZM5Ti9FGm6W4HQEylKOG26tfIyLxHTajXqBYIxcRwquJYAAhzk5NQSdb2BYJUnKFxSvqTCU5PVRpOnuB0BKk3iOPBIoAAQ5ycmoJOt7AsEdpWHmr0ClLMlKK15AWATiScIWgKBCnJSUZpa7NBzk5NQSdb2BYI7Rdnnr06hTkpJTSV7UBYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABzx/hnQnEi5wpAc3m7SGavQrG/b/ACRUotzi+RM4zk9HGk7W4G4vw5f3iMPPSzVVcDZRlLDadW/kUlSSA44jTm03tH3OmG7hF9DFh96Tkk72Nw4uMaYFHPD8eJ5nQhwkpNwaV72BmB4PVjB/d/JlKLjCotX1JhGcXq403b3AR+PLyX2OhzcZ9o5Ra15lxzV3qvoBpzw/HieZ0IcJKTcGle9gZj+D1RspSWIlpT+YeHeHlvXmZkk5RcmnQHQ54/wzoTiRc4UgJxPHh+Yw/HieZqhJyUptabJBwkpNwaV72By/6f8A6OmJ48PzN7P9PLfr1ChJyTm062oCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS5pJvXR0JTyusrfkcpXlntWb13R0n4oef2A2U6aVNt8jXNKGZprpxJnfaRy1dPcYr7sVLi1YFp2k1xDaSt7E4TvDXTQzG+G/T6gbGad6NNcGIzzOsrXmZ/3f/P3EPFPz+wFRkpK0aRheF+b+pYEymoutXW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'... 7760 more characters,
+      result: {
+        code: 'Approved',
+        hostResponse: '001',
+        message: 'Approved',
+        terminalResponse: '000'
+        },
+      sequence: '001416038',
+      terminal: 'JJ009250',
+      transaction: 'sale'
+    },
+    serial: '0000158224676911',
+    source: 'com.payten.paytenapos',
+    status: 'APPROVED',
+    statusMessage: 'Approved',
+    statusMessageLocal: 'Odobreno',
+    timestamp: '2024-12-09T19: 04: 07.550Z',
+    transactionId: '659cebf6-bf54-4952-b8b7-fb3bbf7feb9f',
+    type: 'TRANSACTION',
+    vendor: 'Castles',
+    sourceIp: '77.222.25.33',
+    receivedTimestamp: '2024-12-09T19: 04: 00.737923Z'
+}
