@@ -4,73 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kafka Messages</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- Poveži tvoj CSS fajl -->
   </head>
   <body>
+    <h1>Realtime transactions</h1>
+    <button onclick="clearMessages()">Clear Messages</button>
     <div class="container">
-      <h1>Received Kafka Messages</h1>
-
+      
       <!-- Accordion for displaying messages -->
       <div id="accordionExample">
-        <% if (messages && messages.length > 0) { %> <% messages.forEach((msg)
-        => { %>
-        <div class="poruka <%= msg.Level.toLowerCase() %>">
-          <span class="key">Tid: <%= msg.TID %></span>
-          <span class="level">LvL: <%= msg.Level %></span>
-          <span class="source">Source: <%= msg.Source %></span>
-          <span class="message"><%= msg.Message %></span>
-          <span class="timestamp"><%= msg.Timestamp %></span>
-        </div>
-        <% }) %> <% } else { %>
-        <p>No messages available.</p>
-        <% } %>
-      </div>
+        <% if (messages && messages.length > 0) { %>
+            <% messages.forEach((msg) => { %>
 
-      <!-- Optional: add a button to clear the messages -->
-      <button onclick="clearMessages()">Clear Messages</button>
+            <% }) %>
+        <% } else { %>
+            <p>No messages available.</p>
+        <% } %>
+        
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const socket = io();
-
-      // Listen for 'message' events from the server
-      socket.on("message", (msg) => {
-        const messageList = document.getElementById("accordionExample");
-        const listItem = document.createElement("div");
-        listItem.className = "poruka";
-
-        const keySpan = document.createElement("span");
-        keySpan.className = "key";
-        keySpan.textContent = `Tid: ${msg.key}`;
-
-        const levelSpan = document.createElement("span");
-        levelSpan.className = "level";
-        levelSpan.textContent = `LvL: ${msg.level}`;
-
-        const sourceSpan = document.createElement("span");
-        sourceSpan.className = "source";
-        sourceSpan.textContent = `Source: ${msg.source}`;
-
-        const messageSpan = document.createElement("span");
-        messageSpan.className = "message";
-        messageSpan.textContent = msg.text;
-
-        listItem.appendChild(keySpan);
-        listItem.appendChild(levelSpan);
-        listItem.appendChild(sourceSpan);
-        listItem.appendChild(messageSpan);
-
-        // Prepend the new message to the list
-        messageList.prepend(listItem);
-      });
-
-      // Function to clear the message list
-      function clearMessages() {
-        const messageList = document.getElementById("accordionExample");
-        messageList.innerHTML = "";
-      }
-    </script>
+    <script src="js.js"></script>
   </body>
 </html>

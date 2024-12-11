@@ -1,15 +1,14 @@
-import express from 'express';
-import { Kafka } from 'kafkajs';
-import { Server } from 'socket.io';
-import bodyParser from 'body-parser';
-import "dotenv/config.js";
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
+const { Kafka } = require('kafkajs')
+const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const app = express();
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;  // Dodaj default vrednost za port
-const server = app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
-const io = new Server(server);  // Konektuj Socket.IO sa Express serverom
+const io = socketIO(server);
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -87,5 +86,9 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
 })();
 
 app.get('/', (req, res) => {
-    res.render('index', { messages });
+    const reversedMessages = messages.slice().reverse();
+    res.render('index', { messages: reversedMessages });
+});
+server.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
 });
