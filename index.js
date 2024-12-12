@@ -15,6 +15,9 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 let messages = [];
+let masterCount = 0;
+let dinaCount = 0;
+let visaCount = 0;
 
 const kafka = new Kafka({
     brokers: [process.env.BROKER_1, process.env.BROKER_2, process.env.BROKER_3, process.env.BROKER_4, process.env.BROKER_5, process.env.BROKER_6, process.env.BROKER_7, process.env.BROKER_8],
@@ -41,6 +44,7 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                 const termResponse = value.properties?.result?.terminalResponse || 'N/A';
                 const { timestamp, receivedTimestamp, status } = value;
 
+
                 if (status === 'DECLINED') {
                     messages.push({
                         TID: tid,
@@ -52,6 +56,9 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         Brand: brand,
                         HostResponse: hostResponse,
                         TerminalResponse: termResponse,
+                        MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
                     });
 
                     console.log({
@@ -64,14 +71,20 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         Brand: brand,
                         HostResponse: hostResponse,
                         TerminalResponse: termResponse,
+                        MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
                     });
 
-                    let masterCount = 0;
 
                     if (brand === 'MASTERCARD') {
                         masterCount++;
+                    } else if (brand === 'DINACARD') {
+                        dinaCount++;
+                    } else if (brand === 'VISA') {
+                        visaCount++;
                     }
-                    console.log(masterCount)
+
 
                     io.emit('message', {
                         TID: tid,
@@ -84,6 +97,8 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         HostResponse: hostResponse,
                         TerminalResponse: termResponse,
                         MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
                     });
                 }
             } catch (error) {

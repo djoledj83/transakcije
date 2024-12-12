@@ -54,6 +54,18 @@ socket.on("message", (msg) => {
     terminalResponseSpan.className = "message";
     terminalResponseSpan.textContent = `Terminal resp: ${msg.TerminalResponse}`;
 
+    const dinaCounter = document.createElement("span");
+    dinaCounter.className = "message";
+    dinaCounter.textContent = `DinaCount: ${msg.DinaCount}`;
+
+    const masteCounter = document.createElement("span");
+    masteCounter.className = "message";
+    masteCounter.textContent = `MasterCount: ${msg.MasterCount}`;
+
+    const visaCounter = document.createElement("span");
+    visaCounter.className = "message";
+    visaCounter.textContent = `VisaCount: ${msg.VisaCount}`;
+
     listItem.appendChild(keySpan);
     listItem.appendChild(levelSpan);
     listItem.appendChild(binSpan);
