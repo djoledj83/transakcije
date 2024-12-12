@@ -42,10 +42,16 @@ h1 {
   border-radius: 4px;
   border-left: 5px solid #007bff;
 } 
-.key, .acq, .bin, .key, .visa, .master, .message, .dina {
-  width: auto;
+.key, .acq, .bin, .key, .visa, .master, .message, .dina, .brand {
+  /* width: auto; */
   padding: 10px;
   text-align: left;
+}
+.brand {
+  width: 200px;
+  background-color: aqua;
+  color: rgb(0, 87, 82);
+  font-weight: bold;
 }
 .acq {
   width: 150px;
@@ -54,16 +60,20 @@ h1 {
   background-color: #c73436;
   color: white;
   font-weight: bold;
+  width: 200px;
 }
 .master{
   color: white;
   font-weight: bold;
   background-color: #EB001B;
+  width: 200px;
 }
 .visa{
   color: white;
   font-weight: bold;
-  background-color: #15195A;
+  background-color: #337ddd;
+  width: 200px;
+
 }
 .key{
   font-weight: bold;
@@ -80,7 +90,7 @@ h1 {
   color: #ff6600;
 }
 .poruka .bin {
-  width: 100px;
+  width: 130px;
 }
 
 button {

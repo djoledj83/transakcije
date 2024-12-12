@@ -39,7 +39,7 @@ socket.on("message", (msg) => {
             break;
 
         default:
-            brandSpan.className = "bin";
+            brandSpan.className = "brand";
             break;
     }
 

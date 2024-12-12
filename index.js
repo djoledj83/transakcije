@@ -66,6 +66,13 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         TerminalResponse: termResponse,
                     });
 
+                    let masterCount = 0;
+
+                    if (brand === 'MASTERCARD') {
+                        masterCount++;
+                    }
+                    console.log(masterCount)
+
                     io.emit('message', {
                         TID: tid,
                         ACQ: acquirer,
@@ -76,6 +83,7 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         Brand: brand,
                         HostResponse: hostResponse,
                         TerminalResponse: termResponse,
+                        MasterCount: masterCount,
                     });
                 }
             } catch (error) {
