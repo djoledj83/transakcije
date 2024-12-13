@@ -112,6 +112,11 @@ app.get('/', (req, res) => {
     const reversedMessages = messages.slice().reverse();
     res.render('index', { messages: reversedMessages });
 });
+
+app.post('/clear', (req, res) => {
+    messages = [];
+})
+
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
