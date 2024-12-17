@@ -15,7 +15,7 @@ body {
 /* text-align: center; */
   width: 100%;
   /* max-width: 900px; */
-  height: 80vh;
+  height: 90vh;
   overflow: scroll;
   margin-top: 20px;
   padding: 20px;
@@ -42,6 +42,16 @@ h1 {
   border-radius: 4px;
   border-left: 5px solid #007bff;
 } 
+
+.porukaDark {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #b3b3b3;
+  border-radius: 4px;
+  border-left: 5px solid #007bff;
+}
 .key, .acq, .bin, .key, .visa, .master, .message, .dina, .brand {
   /* width: auto; */
   padding: 10px;
@@ -55,6 +65,7 @@ h1 {
 }
 .acq {
   width: 150px;
+  text-align: left;
 }
 .dina {
   background-color: #c73436;
@@ -85,11 +96,7 @@ h1 {
   width: 150px;
 }
 
-.poruka .acq {
-  text-align: left;
-  color: #ff6600;
-}
-.poruka .bin {
+.bin {
   width: 130px;
 }
 

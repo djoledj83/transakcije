@@ -1,10 +1,14 @@
 const socket = io();
 
+let currentClass = "poruka"; // Početna klasa koja se primenjuje na nove poruke
+
 // Listen for 'message' events from the server
 socket.on("message", (msg) => {
     const messageList = document.getElementById("accordionExample");
     const listItem = document.createElement("div");
-    listItem.className = "poruka";
+
+    // Postavi trenutnu klasu (poruka ili porukaDark) na novu poruku
+    listItem.className = currentClass;
 
     const keySpan = document.createElement("span");
     keySpan.className = "key";
@@ -24,20 +28,17 @@ socket.on("message", (msg) => {
 
     const brandSpan = document.createElement("span");
 
-    // Dynamically set the class based on msg.Brand
+    // Dinamički postavi klasu za brend
     switch (msg.Brand) {
         case "MASTERCARD":
             brandSpan.className = "master";
             break;
-
         case "VISA":
             brandSpan.className = "visa";
             break;
-
         case "DINACARD":
             brandSpan.className = "dina";
             break;
-
         default:
             brandSpan.className = "brand";
             break;
@@ -48,32 +49,57 @@ socket.on("message", (msg) => {
 
     const hostResponseSpan = document.createElement("span");
     hostResponseSpan.className = "message";
-    hostResponseSpan.textContent = `Host resp: ${msg.HostResponse}`;
+    hostResponseSpan.textContent = `HR: ${msg.HostResponse}`;
 
     const terminalResponseSpan = document.createElement("span");
     terminalResponseSpan.className = "message";
-    terminalResponseSpan.textContent = `Terminal resp: ${msg.TerminalResponse}`;
+    terminalResponseSpan.textContent = `TR: ${msg.TerminalResponse}`;
 
     const dinaCounter = document.createElement("span");
     dinaCounter.className = "message";
-    dinaCounter.textContent = `DinaCount: ${msg.DinaCount}`;
+    dinaCounter.textContent = `DCount: ${msg.DinaCount}`;
 
     const masteCounter = document.createElement("span");
     masteCounter.className = "message";
-    masteCounter.textContent = `MasterCount: ${msg.MasterCount}`;
+    masteCounter.textContent = `MCount: ${msg.MasterCount}`;
 
     const visaCounter = document.createElement("span");
     visaCounter.className = "message";
-    visaCounter.textContent = `VisaCount: ${msg.VisaCount}`;
+    visaCounter.textContent = `VCount: ${msg.VisaCount}`;
 
     listItem.appendChild(keySpan);
     listItem.appendChild(levelSpan);
     listItem.appendChild(binSpan);
-    listItem.appendChild(statusSpan);
     listItem.appendChild(brandSpan);
     listItem.appendChild(hostResponseSpan);
     listItem.appendChild(terminalResponseSpan);
+    // listItem.appendChild(dinaCounter);
+    // listItem.appendChild(masteCounter);
+    // listItem.appendChild(visaCounter);
 
-    // Prepend the new message to the top of the list
+    // Dodaj novu poruku na vrh liste
     messageList.prepend(listItem);
 });
+
+// Menjaj trenutnu klasu na svakih 10 sekundi
+setInterval(() => {
+    // Ako je trenutna klasa "poruka", promeni je na "porukaDark", i obrnuto
+    currentClass = currentClass === "poruka" ? "porukaDark" : "poruka";
+}, 60000); // Na svakih 10 sekundi
+
+
+function clearMessages() {
+    fetch('/clear', {
+        method: 'POST'
+    })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload(); // Reload the page
+            } else {
+                throw new Error('Failed to clear messages.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
