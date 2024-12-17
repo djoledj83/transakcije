@@ -2,7 +2,9 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const { Kafka } = require('kafkajs')
+const fs = require('fs');
 const bodyParser = require('body-parser')
+const path = require('path');
 require('dotenv').config()
 
 const app = express();
@@ -18,6 +20,20 @@ let messages = [];
 let masterCount = 0;
 let dinaCount = 0;
 let visaCount = 0;
+
+///////////////////// Učitaj binovi.json //////////////
+let binovi = [];
+const binFilePath = path.join(__dirname, '/public/binovi.json');
+
+try {
+    const binData = fs.readFileSync(binFilePath, 'utf8');
+    binovi = JSON.parse(binData);
+    console.log("BIN podaci su uspešno učitani.");
+} catch (err) {
+    console.error("Greška pri učitavanju binovi.json:", err);
+}
+
+//////////////////// Ucitani binovi /////////////////
 
 const kafka = new Kafka({
     brokers: [process.env.BROKER_1, process.env.BROKER_2, process.env.BROKER_3, process.env.BROKER_4, process.env.BROKER_5, process.env.BROKER_6, process.env.BROKER_7, process.env.BROKER_8],
@@ -45,6 +61,12 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                 const { timestamp, receivedTimestamp, status } = value;
 
 
+                // Pronađi banku na osnovu BIN vrednosti
+                const bankaInfo = binovi.find(item => item.bin === bin);
+                const banka = bankaInfo ? bankaInfo.bank : 'Nepoznata banka';
+
+
+
                 if (status === 'DECLINED') {
                     messages.push({
                         TID: tid,
@@ -59,6 +81,7 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         MasterCount: masterCount,
                         DinaCount: dinaCount,
                         VisaCount: visaCount,
+                        Banka: banka,
                     });
 
                     console.log({
@@ -74,6 +97,7 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         MasterCount: masterCount,
                         DinaCount: dinaCount,
                         VisaCount: visaCount,
+                        Banka: banka,
                     });
 
 
@@ -99,6 +123,7 @@ const consumer = kafka.consumer({ groupId: process.env.GROUP_ID });
                         MasterCount: masterCount,
                         DinaCount: dinaCount,
                         VisaCount: visaCount,
+                        Banka: banka,
                     });
                 }
             } catch (error) {
