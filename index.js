@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
+<<<<<<< HEAD
 const { Kafka } = require('kafkajs');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -8,6 +9,13 @@ const path = require('path');
 const { createObjectCsvWriter } = require('csv-writer');
 const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
+=======
+const { Kafka } = require('kafkajs')
+const fs = require('fs');
+const bodyParser = require('body-parser')
+const path = require('path');
+require('dotenv').config()
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 
 const app = express();
 const server = http.createServer(app);
@@ -34,13 +42,18 @@ const binFilePath = path.join(__dirname, '/public/binovi.json');
 try {
     const binData = fs.readFileSync(binFilePath, 'utf8');
     binovi = JSON.parse(binData);
+<<<<<<< HEAD
     console.log("BIN podaci učitani.");
+=======
+    console.log("BIN podaci su uspešno učitani.");
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 } catch (err) {
     console.error("Greška pri učitavanju binovi.json:", err);
 }
 
 //////////////////// Ucitani binovi /////////////////
 
+<<<<<<< HEAD
 // Funkcija za generisanje naziva fajla sa datumom
 const generateFileName = () => {
     const date = new Date();
@@ -76,6 +89,8 @@ const createCsvWriter = () => {
 let csvWriter = createCsvWriter(); // Inicijalni CSV
 
 // Kafka konfiguracija
+=======
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 const kafka = new Kafka({
     brokers: [
         process.env.BROKER_1,
@@ -171,10 +186,84 @@ const processKafkaMessage = async (message) => {
             },
         });
 
+<<<<<<< HEAD
         console.log("Kafka consumer started successfully.");
     } catch (error) {
         console.error("Error starting Kafka consumer:", error);
     }
+=======
+
+                // Pronađi banku na osnovu BIN vrednosti
+                const bankaInfo = binovi.find(item => item.bin === bin);
+                const banka = bankaInfo ? bankaInfo.bank : 'Nepoznata banka';
+
+
+
+                if (status === 'DECLINED') {
+                    messages.push({
+                        TID: tid,
+                        ACQ: acquirer,
+                        BIN: bin,
+                        Timestamp_created: timestamp,
+                        Timestamp_received: receivedTimestamp,
+                        Status: status,
+                        Brand: brand,
+                        HostResponse: hostResponse,
+                        TerminalResponse: termResponse,
+                        MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
+                        Banka: banka,
+                    });
+
+                    console.log({
+                        TID: tid,
+                        ACQ: acquirer,
+                        BIN: bin,
+                        Timestamp_created: timestamp,
+                        Timestamp_received: receivedTimestamp,
+                        Status: status,
+                        Brand: brand,
+                        HostResponse: hostResponse,
+                        TerminalResponse: termResponse,
+                        MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
+                        Banka: banka,
+                    });
+
+
+                    if (brand === 'MASTERCARD') {
+                        masterCount++;
+                    } else if (brand === 'DINACARD') {
+                        dinaCount++;
+                    } else if (brand === 'VISA') {
+                        visaCount++;
+                    }
+
+
+                    io.emit('message', {
+                        TID: tid,
+                        ACQ: acquirer,
+                        BIN: bin,
+                        Timestamp_created: timestamp,
+                        Timestamp_received: receivedTimestamp,
+                        Status: status,
+                        Brand: brand,
+                        HostResponse: hostResponse,
+                        TerminalResponse: termResponse,
+                        MasterCount: masterCount,
+                        DinaCount: dinaCount,
+                        VisaCount: visaCount,
+                        Banka: banka,
+                    });
+                }
+            } catch (error) {
+                console.error("Error handling Kafka message:", error);
+            }
+        },
+    });
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 })();
 
 // Rute

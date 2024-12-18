@@ -44,7 +44,8 @@ socket.on("message", (msg) => {
             break;
     }
 
-    brandSpan.textContent = `BRAND: ${msg.Brand}`;
+    // Set the text content
+    brandSpan.textContent = `BIN: ${msg.Banka}`;
 
     const hostResponseSpan = document.createElement("span");
     hostResponseSpan.className = "message hr";
