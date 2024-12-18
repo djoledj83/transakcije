@@ -56,6 +56,7 @@ h1 {
 .key, .acq, .bin, .key, .visa, .master, .message, .dina, .brand {
   /* width: auto; */
   padding: 10px;
+  height: 100%;
   text-align: left;
 }
 .brand {

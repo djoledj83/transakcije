@@ -12,7 +12,11 @@ socket.on("message", (msg) => {
 
     const keySpan = document.createElement("span");
     keySpan.className = "key";
-    keySpan.textContent = `Tid: ${msg.TID}`;
+    keySpan.innerHTML = `Tid: ${msg.TID} <br> Time: ${msg.Vreme}`;
+
+    // const timeSpan = document.createElement("span");
+    // timeSpan.className = "key";
+    // timeSpan.textContent = `Time: ${msg.Vreme}`;
 
     const levelSpan = document.createElement("span");
     levelSpan.className = "acq";
@@ -44,8 +48,7 @@ socket.on("message", (msg) => {
             break;
     }
 
-    // Set the text content
-    brandSpan.textContent = `BIN: ${msg.Banka}`;
+    brandSpan.textContent = `BRAND: ${msg.Brand}`;
 
     const hostResponseSpan = document.createElement("span");
     hostResponseSpan.className = "message hr";
@@ -78,6 +81,7 @@ socket.on("message", (msg) => {
     listItem.appendChild(hostResponseSpan);
     listItem.appendChild(terminalResponseSpan);
     listItem.appendChild(bankaSpan);
+    // listItem.appendChild(timeSpan);
     // listItem.appendChild(dinaCounter);
     // listItem.appendChild(masteCounter);
     // listItem.appendChild(visaCounter);

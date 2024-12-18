@@ -35,7 +35,6 @@ try {
     const binData = fs.readFileSync(binFilePath, 'utf8');
     binovi = JSON.parse(binData);
     console.log("BIN podaci učitani.");
-    console.log("BIN podaci su uspešno učitani.");
 } catch (err) {
     console.error("Greška pri učitavanju binovi.json:", err);
 }
@@ -99,6 +98,7 @@ const processKafkaMessage = async (message) => {
     }
 
     try {
+
         const value = JSON.parse(message.value.toString());
         const tid = message.key?.toString() || 'Unknown';
         const acquirer = value.properties?.acquirer || 'Unknown';
@@ -107,6 +107,20 @@ const processKafkaMessage = async (message) => {
         const hostResponse = value.properties?.result?.hostResponse || 'N/A';
         const termResponse = value.properties?.result?.terminalResponse || 'N/A';
         const { timestamp, receivedTimestamp, status } = value;
+
+        const isoDate = timestamp;
+        const date = new Date(isoDate);
+
+        // Extract parts
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        // const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        // Format as desired
+        const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`;
 
         // Pronađi banku na osnovu BIN vrednosti
         const bankaInfo = binovi.find(item => item.BIN === bin);
@@ -127,6 +141,7 @@ const processKafkaMessage = async (message) => {
                 TID: tid,
                 ACQ: acquirer,
                 BIN: bin,
+                Vreme: formattedDate,
                 Timestamp_created: timestamp,
                 Timestamp_received: receivedTimestamp,
                 Status: status,
