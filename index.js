@@ -43,7 +43,11 @@ try {
     const binData = fs.readFileSync(binFilePath, 'utf8');
     binovi = JSON.parse(binData);
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log("BIN podaci učitani.");
+=======
+    console.log("BIN podaci su uspešno učitani.");
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 =======
     console.log("BIN podaci su uspešno učitani.");
 >>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
@@ -53,6 +57,7 @@ try {
 
 //////////////////// Ucitani binovi /////////////////
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Funkcija za generisanje naziva fajla sa datumom
 const generateFileName = () => {
@@ -89,6 +94,8 @@ const createCsvWriter = () => {
 let csvWriter = createCsvWriter(); // Inicijalni CSV
 
 // Kafka konfiguracija
+=======
+>>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 =======
 >>>>>>> d6efd3d2902f5e0e65ae9951b25d0866a3a05ce9
 const kafka = new Kafka({
@@ -192,6 +199,12 @@ const processKafkaMessage = async (message) => {
         console.error("Error starting Kafka consumer:", error);
     }
 =======
+
+                // Pronađi banku na osnovu BIN vrednosti
+                const bankaInfo = binovi.find(item => item.bin === bin);
+                const banka = bankaInfo ? bankaInfo.bank : 'Nepoznata banka';
+
+
 
                 // Pronađi banku na osnovu BIN vrednosti
                 const bankaInfo = binovi.find(item => item.bin === bin);
