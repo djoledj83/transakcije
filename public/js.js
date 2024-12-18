@@ -47,12 +47,16 @@ socket.on("message", (msg) => {
     brandSpan.textContent = `BRAND: ${msg.Brand}`;
 
     const hostResponseSpan = document.createElement("span");
-    hostResponseSpan.className = "message";
+    hostResponseSpan.className = "message hr";
     hostResponseSpan.textContent = `HR: ${msg.HostResponse}`;
 
     const terminalResponseSpan = document.createElement("span");
-    terminalResponseSpan.className = "message";
+    terminalResponseSpan.className = "message tr";
     terminalResponseSpan.textContent = `TR: ${msg.TerminalResponse}`;
+
+    const bankaSpan = document.createElement("span");
+    bankaSpan.className = "message banka";
+    bankaSpan.textContent = `Banka: ${msg.Banka}`;
 
     const dinaCounter = document.createElement("span");
     dinaCounter.className = "message";
@@ -72,6 +76,7 @@ socket.on("message", (msg) => {
     listItem.appendChild(brandSpan);
     listItem.appendChild(hostResponseSpan);
     listItem.appendChild(terminalResponseSpan);
+    listItem.appendChild(bankaSpan);
     // listItem.appendChild(dinaCounter);
     // listItem.appendChild(masteCounter);
     // listItem.appendChild(visaCounter);
@@ -79,6 +84,31 @@ socket.on("message", (msg) => {
     // Dodaj novu poruku na vrh liste
     messageList.prepend(listItem);
 });
+
+
+function startCountdown() {
+    const contdown = document.getElementsByClassName('contdown')[0]; // Pristup prvom elementu sa klasom "contdown"
+    const stoperica = document.createElement("div"); // Kreiranje novog <div> elementa
+    stoperica.setAttribute("id", "timer"); // Dodela ID-a (opciono, za lakši pristup)
+    contdown.appendChild(stoperica); // Dodavanje <div> u "contdown" element
+
+    let counter = 60; // Početna vrednost odbrojavanja
+
+    setInterval(() => {
+        stoperica.textContent = counter; // Postavljanje trenutne vrednosti kao tekst u <div>
+
+        // Odbrojavanje
+        counter--;
+
+        // Ako dostigne 0, resetuj na 60
+        if (counter < 0) {
+            counter = 60;
+        }
+    }, 1000); // Interval u milisekundama (1000ms = 1 sekunda)
+}
+
+
+startCountdown();
 
 // Menjaj trenutnu klasu na svakih 10 sekundi
 setInterval(() => {
