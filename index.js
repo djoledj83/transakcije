@@ -150,7 +150,7 @@ const processKafkaMessage = async (message) => {
                 BIN: bin,
                 Vreme: formattedDate,
                 Timestamp_created: timestamp,
-                Timestamp_received: receivedTimestamp,
+                Timestamp_received: new Date(receivedTimestamp),
                 Status: status,
                 Brand: brand,
                 HostResponse: hostResponse,

@@ -18,6 +18,10 @@ socket.on("message", (msg) => {
     // timeSpan.className = "key";
     // timeSpan.textContent = `Time: ${msg.Vreme}`;
 
+    const Timestamp_received = document.createElement("span");
+    Timestamp_received.className = "acq";
+    Timestamp_received.textContent = `VremeTR: ${msg.Timestamp_received}`;
+
     const levelSpan = document.createElement("span");
     levelSpan.className = "acq";
     levelSpan.textContent = `AcQ: ${msg.ACQ}`;
@@ -75,6 +79,7 @@ socket.on("message", (msg) => {
     visaCounter.textContent = `VCount: ${msg.VisaCount}`;
 
     listItem.appendChild(keySpan);
+    listItem.appendChild(Timestamp_received);
     listItem.appendChild(levelSpan);
     listItem.appendChild(binSpan);
     listItem.appendChild(brandSpan);
