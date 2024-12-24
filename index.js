@@ -53,9 +53,15 @@ const generateFileName = () => {
 // Funkcija za kreiranje CSV tabele
 const createCsvWriter = () => {
     const fileName = generateFileName();
+    const filePath = `data/${fileName}`;
+
+    // Proveri da li fajl postoji
+    const fileExists = fs.existsSync(filePath);
+
     return createObjectCsvWriter({
-        path: `data/${fileName}`,
+        path: filePath,
         header: [
+            { id: 'Vreme', title: 'vremeUpisa' },
             { id: 'TID', title: 'TID' },
             { id: 'ACQ', title: 'Acquirer' },
             { id: 'BIN', title: 'BIN' },
@@ -68,8 +74,9 @@ const createCsvWriter = () => {
             { id: 'MasterCount', title: 'Master Count' },
             { id: 'DinaCount', title: 'Dina Count' },
             { id: 'VisaCount', title: 'Visa Count' },
+            { id: 'Banka', title: 'Banka' },
         ],
-        append: true, // Dodaj na postojeći fajl, ako već postoji
+        append: fileExists, // Dodaj na fajl ako postoji, inače kreiraj novi sa header-ima
     });
 };
 
