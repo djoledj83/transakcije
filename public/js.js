@@ -124,7 +124,7 @@ startCountdown();
 setInterval(() => {
     // Ako je trenutna klasa "poruka", promeni je na "porukaDark", i obrnuto
     currentClass = currentClass === "poruka" ? "porukaDark" : "poruka";
-}, 60000); // Na svakih 10 sekundi
+}, 60000); // Na svakih 60 sekundi
 
 
 function clearMessages() {

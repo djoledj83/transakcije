@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const { createObjectCsvWriter } = require('csv-writer');
 const mongoose = require('mongoose');
+const Transakcije = require('./models/transaction.model.js');
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +27,7 @@ let messages = [];
 let masterCount = 0;
 let dinaCount = 0;
 let visaCount = 0;
+let mongoURI = process.env.MONGO_DB;
 
 ///////////////////// Učitaj binovi.json //////////////
 let binovi = [];
@@ -80,6 +82,7 @@ const createCsvWriter = () => {
     });
 };
 
+
 let csvWriter = createCsvWriter(); // Inicijalni CSV
 
 // Kafka konfiguracija
@@ -133,14 +136,7 @@ const processKafkaMessage = async (message) => {
         const bankaInfo = binovi.find(item => item.BIN === bin);
         const banka = bankaInfo ? bankaInfo.BANK : 'Nepoznata banka';
 
-        if (hostResponse === '903') {
-
-
-
-        }
-
-        if (status === 'DECLINED' && termResponse != "235") {
-            // if (tid === 'SRBDEL0DL277590') {
+        if (status === 'DECLINED' && hostResponse != '235') {
             if (brand === 'MASTERCARD') masterCount++;
             else if (brand === 'DINACARD') dinaCount++;
             else if (brand === 'VISA') visaCount++;
@@ -149,7 +145,7 @@ const processKafkaMessage = async (message) => {
                 TID: tid,
                 ACQ: acquirer,
                 BIN: bin,
-                Vreme: formattedDate,
+                Vreme: formattedDate, // trenutno vreme
                 Timestamp_created: timestamp,
                 Timestamp_received: new Date(receivedTimestamp),
                 Status: status,
@@ -174,6 +170,10 @@ const processKafkaMessage = async (message) => {
 
             // Zapiši poruku u CSV fajl
             await csvWriter.writeRecords([messageData]);
+
+            console.log('Message data before saving:', messageData);
+            await Transakcije.create(messageData);
+
 
             console.log("Processed and saved Kafka message:", messageData);
         }
@@ -216,8 +216,12 @@ app.post('/clear', (req, res) => {
 });
 
 
-// Pokretanje servera
-server.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
 
+// MongoDB connection and server startup
+mongoose
+    .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Connected to MongoDB.');
+        server.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+    })
+    .catch((error) => console.error('Error connecting to MongoDB:', error));
