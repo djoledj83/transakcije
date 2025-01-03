@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+        color: #0046ad;
+      }
+      body {
+        display: flex;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .email-signature {
+        display: flex;
+        align-items: center;
+      }
+      .content {
+        width: 400px;
+      }
+      .firma {
+        margin-top: 10px;
+      }
+      .content {
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .name {
+        font-size: 21px;
+      }
+      .prefix {
+        font-size: 15px;
+      }
+      .sufix {
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+
+      .post {
+        color: #585858;
+        font-size: 13px;
+        margin-top: 5px;
+        font-weight: 400;
+        font-style: italic;
+      }
+      .content hr {
+        margin-right: 20px;
+        margin-top: 10px;
+      }
+      .madel {
+        width: 150px;
+        position: relative;
+      }
+      .image {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+      }
+      .image img {
+        height: 15vh;
+      }
+      .icons {
+        display: flex;
+        justify-content: center;
+      }
+      .company {
+        padding-top: 10px;
+        display: flex;
+        gap: 50px;
+        text-align: center;
+      }
+      .company span {
+        color: #585858;
+        font-size: 13px;
+      }
+      .icons i {
+        padding: 5px;
+        font-size: 24px;
+      }
+      .contact ul li {
+        line-height: 30px;
+      }
+      .contact ul {
+        padding: 0 0 0 10px;
+        border-left: 2px solid #0046ad;
+      }
+      .contact ul li i {
+        width: 30px;
+      }
+      .contact ul li a {
+        padding-left: 10px;
+      }
+
+      @media (max-width: 500px) {
+        .email-signature {
+          flex-flow: column;
+          text-align: center;
+        }
+        .content {
+          border: none;
+          padding: 10px;
+        }
+        .company {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .contact ul {
+          padding: 0;
+          border: none;
+        }
+      }
+    </style>
+
+    <script
+      src="https://kit.fontawesome.com/97e03fbe3e.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Institut za vodoprivredu Jaroslav Cerni</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="email-signature">
+        <div class="madel">
+          <div class="image">
+            <a href="https://www.jcerni.rs/" target="_blank">
+              <img src="logo.svg" alt="profil" height="100px" />
+            </a>
+          </div>
+          <div>
+            <ul class="icons">
+              <li><i class="fa-brands fa-linkedin"></i><a href="#"></a></li>
+              <li><i class="fa-brands fa-youtube"></i><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="content">
+          <h1>
+            <span class="prefix">Prof. Dr. </span
+            ><span class="name">Aleksandra Orlić Momčilović,</span>
+          </h1>
+          <p class="sufix">dipl. analit. zašt. živ. sred. | MSc Env. Analyst</p>
+          <hr />
+          <h3 class="post">
+            Šef odeljenja za upravljanje dokumentacijom, informacionim sistemima
+            i tehnologijama
+          </h3>
+          <h3 class="post">
+            Manager of the Section for Document Management, Information Systems,
+            and Technologies
+          </h3>
+          <hr />
+          <div class="company">
+            <div>
+              <span>Institut za vodoprivredu</span>
+              <h3>„Jaroslav Černi“</h3>
+            </div>
+
+            <div>
+              <h3>Jaroslav Černi</h3>
+              <span>Water institute</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact">
+          <ul>
+            <li>
+              <i class="fa-solid fa-phone-volume"></i
+              ><a href="tel:+3816012345678">+381 60 123 45 67</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-blender-phone"></i
+              ><a href="tel:+381111234567">+381 11 123 45 67</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i
+              ><a href="mailto:test@test.com">test@test.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-globe"></i
+              ><a href="https://www.jcerni.rs/">www.jcerni.rs/</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i
+              ><a href="#">Jaroslava Černog 80,</a>
+            </li>
+            <li>
+              <i class="fa-solid"></i><a href="#">11226 Beograd, Srbija</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <br />
+      <hr />
+    </div>
+  </body>
+</html>

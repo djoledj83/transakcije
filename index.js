@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const { createObjectCsvWriter } = require('csv-writer');
-const TelegramBot = require('node-telegram-bot-api');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
@@ -139,7 +139,8 @@ const processKafkaMessage = async (message) => {
 
         }
 
-        if (status === 'DECLINED') {
+        if (status === 'DECLINED' && termResponse != "235") {
+            // if (tid === 'SRBDEL0DL277590') {
             if (brand === 'MASTERCARD') masterCount++;
             else if (brand === 'DINACARD') dinaCount++;
             else if (brand === 'VISA') visaCount++;
@@ -219,3 +220,4 @@ app.post('/clear', (req, res) => {
 server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
